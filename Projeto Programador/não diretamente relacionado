@@ -1,0 +1,3 @@
+aprendi melhor sobre a bios e como mudar a quantidade de ram que pode ser "emprestada" caso você não tenha uma placa de video diretamente por um exemplo mudar o decimal após criar a nova area para o numero que você deseja (cuidado para não extender mais do que você tem de ram) (infelizmente alguns pcs simplesmente não permitiu as mudanças mesmo assim)
+
+tambem aprendi a fazer um atalho que desliga o computador diretamente e de forma correta para evitar que o windows faça merda/não salve as coisas direito após você desligar e ficar naquele estado hiperbolico de falso desligar (se for fazer: Shutdown -s(desligamente completo do sistema) -t(tempo) 0) (se for fazer fazer mude o icone e deixe um nome caracteristico para não clicar sem querer pelamor) 
