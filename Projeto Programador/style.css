@@ -1,12 +1,29 @@
+header {
+  border: 2px solid white;
+  
+  padding: 10px;
+  /* caixa branca */
+}
+
+span{
+  border: 1px solid black;
+  /*mini caixa preta*/
+}
+
+body{
+  background: purple;
+ /* irrelevante tipo pro codigo é so comentario */
+}
 body {
-  background-color: orange;
-  background-image: url(https://preview.redd.it/deixa-o-cara-gozar-v0-5zm82o0ap2fc1.png?width=720&format=png&auto=webp&s=4c699dc1ccc80586ce73eda32b7972e0b59d82df);
-  background-repeat: no-repeat;
-  background-position: center;
+ background: orange;
+ /* o ultimo comando tem prioridade */
 }
-#container {
-  width: 720px;
-  height: 520px;;
-  border: 2px solid black;
-  margin: auto;
+
+p {
+  color: blue
 }
+
+p#bombastic {
+  color:black
+}
+/* o id não pode começar com numero e evitar caracteres especiais com execção só do underline mas quem nomeia algo começando com underline eu não sei */
