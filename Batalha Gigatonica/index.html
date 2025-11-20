@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ultra instinto games</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    #gameArea {
+      position: relative;
+      width: 500px;
+      height: 300px;
+      background: black;
+      border: 3px solid white;
+      overflow: hidden;
+    }
+
+    #player {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: cyan;
+      left: 240px;
+      top: 140px;
+    }
+
+    .bullet {
+      position: absolute;
+      width: 15px;
+      height: 15px;
+      background: red;
+      border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+  <div id="gameArea">
+    <div id="player"></div>
+  </div>
+
+  <script>
+    const gameArea = document.getElementById("gameArea");
+    const player = document.getElementById("player");
+
+    let playerX = 240;
+    let playerY = 140;
+    const speed = 5;
+
+    let keys = {};
+
+    document.addEventListener("keydown", (e) => (keys[e.key] = true));
+    document.addEventListener("keyup", (e) => (keys[e.key] = false));
+
+    function movePlayer() {
+      if (keys["w"] || keys["ArrowUp"]) playerY -= speed;
+      if (keys["s"] || keys["ArrowDown"]) playerY += speed;
+      if (keys["a"] || keys["ArrowLeft"]) playerX -= speed;
+      if (keys["d"] || keys["ArrowRight"]) playerX += speed;
+
+      // limites da area
+      playerX = Math.max(0, Math.min(480, playerX));
+      playerY = Math.max(0, Math.min(280, playerY));
+
+      player.style.left = playerX + "px";
+      player.style.top = playerY + "px";
+    }
+
+    // cria projeteis
+    function spawnBullet() {
+      const bullet = document.createElement("div");
+      bullet.classList.add("bullet");
+
+      // aparece de um dos 4 lados
+      const side = Math.floor(Math.random() * 4);
+      let x, y, dx, dy;
+
+      if (side === 0) {
+        x = Math.random() * 500;
+        y = -20;
+        dx = 0;
+        dy = 2;
+      } else if (side === 1) {
+        x = 500;
+        y = Math.random() * 300;
+        dx = -2;
+        dy = 0;
+      } else if (side === 2) {
+        x = Math.random() * 500;
+        y = 300;
+        dx = 0;
+        dy = -2;
+      } else {
+        x = -20;
+        y = Math.random() * 300;
+        dx = 2;
+        dy = 0;
+      }
+
+      bullet.style.left = x + "px";
+      bullet.style.top = y + "px";
+      gameArea.appendChild(bullet);
+
+      function moveBullet() {
+        x += dx;
+        y += dy;
+        bullet.style.left = x + "px";
+        bullet.style.top = y + "px";
+
+        // colisão games
+        if (
+          x < playerX + 20 &&
+          x + 15 > playerX &&
+          y < playerY + 20 &&
+          y + 15 > playerY
+        ) {
+          alert("vá em paz");
+          location.reload();
+        }
+
+        // remove projéteis fora da tela
+        if (x < -30 || x > 530 || y < -30 || y > 330) {
+          bullet.remove();
+        } else {
+          requestAnimationFrame(moveBullet);
+        }
+      }
+
+      requestAnimationFrame(moveBullet);
+    }
+
+    setInterval(spawnBullet, 700);
+    function gameLoop() {
+      movePlayer();
+      requestAnimationFrame(gameLoop);
+    }
+    gameLoop();
+  </script>
+</body>
+</html>
